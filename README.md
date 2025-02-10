@@ -37,7 +37,7 @@ This project aims to predict the health status of crops using numerical and geos
 
 ---
 ## Results & Findings
-- **Best Threshold:** 0.36 (F1-score: 0.3367)
+- **Best Threshold:** 0.43 (F1-score: 0.738) on Zindi Public Leaderboard
 - **Soft Voting improved generalization**, reducing overfitting.
 - **Categorical features were analyzed but not used** due to lack of discriminative power.
 
