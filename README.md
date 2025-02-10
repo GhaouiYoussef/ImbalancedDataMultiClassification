@@ -2,6 +2,8 @@
 
 ## Objective
 This project aims to predict the health status of crops using numerical and geospatial features extracted from Google Earth data. The classification problem is tackled through a stepwise approach, handling class imbalance effectively.
+![Flowchart](flowchart.png)
+
 
 ---
 ## Data Analysis & Preprocessing
