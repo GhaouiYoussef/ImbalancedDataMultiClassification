@@ -1,45 +1,45 @@
-# Crop Health Classification Pipeline
+# Telangana Crop Health Challenge
 
-## Overview
-This project focuses on classifying crop health using numerical features derived from satellite imagery and field data. We decompose the multi-class classification problem into two steps:
-1. **Healthy vs. Not Healthy (H vs. NH)**: A binary classification to determine if a crop is healthy or not.
-2. **Type of Not Healthy Condition**: A multi-class classification to predict the type of unhealthy condition.
+## Objective
+This project aims to predict the health status of crops using numerical and geospatial features extracted from Google Earth data. The classification problem is tackled through a stepwise approach, handling class imbalance effectively.
 
-To handle class imbalance, we applied **SMOTE** (Synthetic Minority Over-sampling Technique) only to augment class 2 in the multi-class classification stage.
+---
+## Data Analysis & Preprocessing
 
-## Data Analysis & Feature Engineering
-### Data Sources
-- Numerical features extracted from **Google Earth** imagery and other agricultural datasets.
-- Statistical transformations applied to enhance predictive power.
+### Data Sources:
+- **Train and Test Data**: Contain crop health labels and geospatial information.
+- **Google Earth Engine Features**: Used for deriving numerical attributes.
 
-### Feature Engineering
-- **Grow Time Calculation**: Derived from sowing and harvesting dates.
-- **Statistical Feature Engineering**: Applied transformations such as skewness, kurtosis, and power transformations.
-- **Handling Missing Values**: Imputation using the most frequent strategy.
-- **Feature Selection**: Only numerical features were used for the classifiers after analyzing categorical features and determining their incompatibility with the models.
+### Data Cleaning & Feature Engineering:
+- **Geometry Processing**: Converted WKT-based geometries into geospatial formats.
+- **Feature Extraction**: Numerical features were selected and transformed using Yeo-Johnson.
+- **Statistical Feature Engineering**: Derived features such as skewness and kurtosis.
+- **Categorical Feature Analysis**: Reviewed but ultimately excluded due to poor predictive power.
 
+---
 ## Classification Approach
-### Step 1: Healthy vs. Not Healthy (Binary Classification)
-- **Model Used**: Logistic Regression
-- **Oversampling**: Applied SMOTE only to class 2 to balance the dataset.
-- **Evaluation**: Used cross-validation and F1-score for performance measurement.
 
-### Step 2: Classification of Not Healthy Types (Multi-class Classification)
-- **Ensemble Model with Soft Voting**:
+### Decomposition Strategy:
+1. **Binary Classification:** Healthy (H) vs Not Healthy (NH)
+2. **Multiclass Classification:** Predicting NH subtypes
+
+### Handling Class Imbalance:
+- **SMOTE applied to augment class 2** in the NH classification.
+
+### Model Selection:
+- **Soft Voting Classifier** combining:
   - Logistic Regression
   - Random Forest
-  - Gradient Boosting Classifier
-- **Cross-Validation Strategy**: 7-fold Stratified Cross-Validation.
+  - Gradient Boosting
+- **Logistic Regression** used for NH classification.
 
-## Categorical Features Analysis
-After thorough analysis, categorical features were excluded from final classification models due to:
-- **High cardinality**: Leading to sparsity and complexity in encoding.
-- **Low predictive power**: Correlation tests showed weak relationships with the target variable.
+---
+## Results & Findings
+- **Best Threshold:** 0.36 (F1-score: 0.3367)
+- **Soft Voting improved generalization**, reducing overfitting.
+- **Categorical features were analyzed but not used** due to lack of discriminative power.
 
-## Results & Performance
-- **Best Threshold for Classification**: 0.36 (F1-score: 0.3367)
-- **Weighted F1-score after SMOTE and feature engineering improvements**: Achieved stable and improved classification results with ensemble learning.
+This approach ensures a robust classification pipeline for crop health prediction with a focus on handling imbalanced datasets efficiently.
 
-## Conclusion
-This pipeline successfully decomposed the classification task into two stages, leveraged soft voting for robust prediction, and applied statistical feature engineering techniques to enhance performance. Future work could explore deep learning techniques for feature extraction from raw imagery data.
+
 
